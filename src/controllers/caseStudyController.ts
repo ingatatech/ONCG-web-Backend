@@ -21,7 +21,7 @@ export const getCaseStudies = asyncHandler(async (req: Request, res: Response) =
     impact,
     isActive,
     page = 1,
-    limit = 10,
+    limit = 50,
     sortBy = "displayOrder",
     sortOrder = "asc",
     search,

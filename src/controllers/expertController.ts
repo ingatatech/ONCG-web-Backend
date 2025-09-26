@@ -98,7 +98,7 @@ export const getExperts = asyncHandler(async (req: Request, res: Response) => {
   const { 
     role,
     page = 1, 
-    limit = 20, 
+    limit = 50, 
     sortBy = "sortOrder", 
     sortOrder = "asc",
     search 

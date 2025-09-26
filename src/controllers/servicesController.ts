@@ -27,7 +27,7 @@ export const getServices = asyncHandler(async (req: Request, res: Response) => {
     category,
     isActive,
     page = "1",
-    limit = "10",
+    limit = "50",
     sortBy = "sortOrder",
     sortOrder = "asc",
     search,
