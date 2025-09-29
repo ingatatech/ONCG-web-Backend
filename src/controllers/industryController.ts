@@ -175,7 +175,22 @@ export const updateIndustry = authAsyncHandler(async (req: Request, res: Respons
       return res.status(400).json({ message: "Industry with this slug already exists" });
     }
   }
-
+ // Handle experts update
+  if (updateData.expertIds !== undefined) {
+    if (updateData.expertIds.length > 0) {
+      const experts: Expert[] = await expertRepo.findByIds(updateData.expertIds);
+      if (experts.length !== updateData.expertIds.length) {
+        return res.status(400).json({
+          success: false,
+          message: "One or more experts not found",
+        });
+      }
+      industry.experts = experts;
+    } else {
+      industry.experts = [];
+    }
+    delete updateData.expertIds;
+  }
   Object.assign(industry, updateData);
   const updatedIndustry = await industryRepo.save(industry);
 
