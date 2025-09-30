@@ -24,7 +24,7 @@ export const getInsights = asyncHandler(async (req: Request, res: Response) => {
     authorId,
     isActive,
     page = 1,
-    limit = 10,
+    limit = 20,
     sortBy = "createdAt",
     sortOrder = "desc",
     search,

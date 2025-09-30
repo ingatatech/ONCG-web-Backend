@@ -16,7 +16,7 @@ export const getIndustries = asyncHandler(async (req: Request, res: Response) =>
   const {
     isActive,
     page = 1,
-    limit = 10,
+    limit = 50,
     sortBy = "name",
     sortOrder = "asc",
     search,
