@@ -248,7 +248,8 @@ export const addExpertToIndustry = authAsyncHandler(async (req: Request, res: Re
     return res.status(400).json({ message: "Expert is already assigned to this industry" });
   }
 
-  industry.experts = [...(industry.experts || []), expert];
+  // industry.experts = [...(industry.experts || []), expert];
+  industry.experts.push(expert);
   await industryRepo.save(industry);
 
   const completeIndustry = await industryRepo.findOne({ where: { id }, relations: ["experts"] });
