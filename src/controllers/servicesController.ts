@@ -325,7 +325,7 @@ export const updateService = authAsyncHandler(async (req: Request, res: Response
   }
 
   Object.assign(service, updateData);
-  const updatedService = await serviceRepo.save(service);
+  await serviceRepo.save(service);
 
   // Fetch the complete service with relations
   const completeService = await serviceRepo.findOne({

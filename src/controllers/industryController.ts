@@ -192,7 +192,7 @@ export const updateIndustry = authAsyncHandler(async (req: Request, res: Respons
     delete updateData.expertIds;
   }
   Object.assign(industry, updateData);
-  const updatedIndustry = await industryRepo.save(industry);
+   await industryRepo.save(industry);
 
   // Fetch the complete industry with relations
   const completeIndustry = await industryRepo.findOne({
