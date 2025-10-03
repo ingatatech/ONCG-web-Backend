@@ -274,10 +274,6 @@ export const validateExpertCreation = [
     .isEmail()
     .withMessage("Invalid email format"),
 
-  body("linkedinUrl")
-    .optional()
-    .isURL({ protocols: ["https"], require_protocol: true })
-    .withMessage("LinkedIn URL must be a valid HTTPS URL"),
 
   body("sortOrder")
     .optional()
@@ -330,11 +326,6 @@ export const validateExpertUpdate = [
     .optional()
     .isEmail()
     .withMessage("Invalid email format"),
-
-  body("linkedinUrl")
-    .optional()
-    .isURL({ protocols: ["https"], require_protocol: true })
-    .withMessage("LinkedIn URL must be a valid HTTPS URL"),
 
   body("sortOrder")
     .optional()
