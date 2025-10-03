@@ -266,8 +266,8 @@ export const validateExpertCreation = [
   body("bio")
     .optional()
     .trim()
-    .isLength({ min: 10, max: 1000 })
-    .withMessage("Bio must be between 10 and 1000 characters"),
+    .isLength({ min: 10, max: 10000 })
+    .withMessage("Bio must be between 10 and 10000 characters"),
 
   body("email")
     .optional()
