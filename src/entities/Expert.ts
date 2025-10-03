@@ -8,11 +8,6 @@ import {
 } from "typeorm"
 import { Service } from "./Service"
 
-export enum RoleType {
-  EXPERT = "expert",
-  LEADER = "leader",
-}
-
 @Entity()
 export class Expert {
   @PrimaryGeneratedColumn("uuid")
@@ -62,13 +57,6 @@ export class Expert {
 
   @Column({ type: "boolean", default: true })
   isActive!: boolean
-
-  @Column({
-    type: "enum",
-    enum: RoleType,
-    default: RoleType.EXPERT,
-  })
-  role!: RoleType
 
   @ManyToMany(() => Service, (service) => service.experts)
   services!: Service[]

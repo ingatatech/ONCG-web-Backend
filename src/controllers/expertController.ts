@@ -1,6 +1,6 @@
 import type { Request, Response } from "express"
 import { AppDataSource } from "../data-source"
-import { Expert, RoleType } from "../entities/Expert"
+import { Expert } from "../entities/Expert"
 import { validationResult } from "express-validator"
 import { asyncHandler, authAsyncHandler } from "../utils/asyncHandler"
 import { uploadImage } from "../utils/uploadImage"
@@ -29,7 +29,6 @@ export const createExpert = authAsyncHandler(async (req: Request, res: Response)
     projectsLed,
     education,
     specialties,
-    role, // ✅ new
     professionalMembership
   } = req.body
 
@@ -73,7 +72,6 @@ export const createExpert = authAsyncHandler(async (req: Request, res: Response)
     specialties: parsedSpecialties,
     image: imageUrl,
     sortOrder: maxOrder + 1,
-    role: role && Object.values(RoleType).includes(role) ? role : RoleType.EXPERT,
   })
 
   const savedExpert = await expertRepository.save(expert)
@@ -96,7 +94,6 @@ export const getExperts = asyncHandler(async (req: Request, res: Response) => {
   }
 
   const { 
-    role,
     page = 1, 
     limit = 50, 
     sortBy = "sortOrder", 
@@ -106,11 +103,6 @@ export const getExperts = asyncHandler(async (req: Request, res: Response) => {
 
   const queryBuilder = expertRepository.createQueryBuilder("expert")
 
-  // Apply filters
-  if (role && Object.values(RoleType).includes(role as RoleType)) {
-    queryBuilder.andWhere("expert.role = :role", { role })
-  }
-
   if (search) {
     queryBuilder.andWhere(
       "(expert.name ILIKE :search OR expert.title ILIKE :search OR expert.bio ILIKE :search)",
@@ -119,7 +111,7 @@ export const getExperts = asyncHandler(async (req: Request, res: Response) => {
   }
 
   // Apply sorting
-  const validSortFields = ["name", "title", "sortOrder", "createdAt", "role"]
+  const validSortFields = ["name", "title", "sortOrder", "createdAt",]
   const sortField = validSortFields.includes(sortBy as string) ? sortBy : "sortOrder"
   const order = sortOrder === "desc" ? "DESC" : "ASC"
   queryBuilder.orderBy(`expert.${sortField}`, order)
@@ -195,12 +187,7 @@ export const updateExpert = asyncHandler(async (req: Request, res: Response) => 
  if (updateData.professionalMembership) {
     updateData.professionalMembership = JSON.parse(updateData.professionalMembership)
   }
-  if (updateData.role && !Object.values(RoleType).includes(updateData.role)) {
-    return res.status(400).json({
-      success: false,
-      message: "Invalid role. Must be either 'expert' or 'leader'",
-    })
-  }
+
 
   Object.assign(expert, updateData)
   const updatedExpert = await expertRepository.save(expert)
@@ -268,31 +255,8 @@ export const deleteExpert = asyncHandler(async (req: Request, res: Response) => 
   })
 })
 
-// ✅ Get only leaders
-export const getLeaders = asyncHandler(async (_req: Request, res: Response) => {
-  const leaders = await expertRepository.find({
-    where: { role: RoleType.LEADER },
-    order: { sortOrder: "ASC", name: "ASC" },
-  })
 
-  res.json({
-    success: true,
-    data: leaders,
-  })
-})
 
-// ✅ Get only experts
-export const getExpertsOnly = asyncHandler(async (_req: Request, res: Response) => {
-  const experts = await expertRepository.find({
-    where: { role: RoleType.EXPERT },
-    order: { sortOrder: "ASC", name: "ASC" },
-  })
-
-  res.json({
-    success: true,
-    data: experts,
-  })
-})
 
 export const reorderExperts = asyncHandler(async (req: Request, res: Response) => { const { expertIds } = req.body 
 if (!Array.isArray(expertIds) || expertIds.length === 0) {

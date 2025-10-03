@@ -1,5 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, CreateDateColumn, UpdateDateColumn } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, CreateDateColumn, UpdateDateColumn, ManyToMany, JoinTable } from "typeorm"
 import { Service } from "./Service"
+import { Leaders } from "./Leaders"
 
 @Entity("service_categories")
 export class ServiceCategory {
@@ -26,6 +27,10 @@ export class ServiceCategory {
     (service) => service.category,
   )
   services!: Service[]
+
+  @ManyToMany(() => Leaders, { eager: true })
+  @JoinTable()
+  leaders!: Leaders[]
 
   @CreateDateColumn()
   createdAt!: Date

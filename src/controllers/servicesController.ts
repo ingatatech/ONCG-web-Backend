@@ -6,11 +6,13 @@ import { CaseStudy } from "../entities/CaseStudy";
 import { Expert } from "../entities/Expert";
 import { asyncHandler, authAsyncHandler } from "../utils/asyncHandler";
 import { validationResult } from "express-validator";
+import { Leaders } from "../entities/Leaders";
 
 const serviceRepo = AppDataSource.getRepository(Service);
 const categoryRepo = AppDataSource.getRepository(ServiceCategory);
 const caseStudyRepo = AppDataSource.getRepository(CaseStudy);
 const expertRepo = AppDataSource.getRepository(Expert);
+const leaderRepo = AppDataSource.getRepository(Leaders);
 
 // Get all services with filtering and pagination
 export const getServices = asyncHandler(async (req: Request, res: Response) => {
@@ -594,6 +596,7 @@ export const getServiceStats = asyncHandler(async (req: Request, res: Response) 
 // Get all categories
 export const getCategories = asyncHandler(async (req: Request, res: Response) => {
   const categories = await categoryRepo.find({
+     relations: [ "leaders"],
     order: { sortOrder: "ASC", name: "ASC" },
   });
 
@@ -614,7 +617,7 @@ export const createCategory = authAsyncHandler(async (req: Request, res: Respons
     });
   }
 
-  const { name, slug, description, isActive = true,} = req.body;
+  const { name, slug, description,  leaderIds = [], isActive = true,} = req.body;
 
   // Check if slug already exists
   const existingCategory = await categoryRepo.findOne({ where: { slug } });
@@ -623,6 +626,18 @@ export const createCategory = authAsyncHandler(async (req: Request, res: Respons
       success: false,
       message: "Category with this slug already exists",
     });
+  }
+
+    // Verify experts exist
+  let leaders: Leaders[] = [];
+  if (leaderIds.length > 0) {
+    leaders = await leaderRepo.findByIds(leaderIds);
+    if (leaders.length !== leaderIds.length) {
+      return res.status(400).json({
+        success: false,
+        message: "One or more experts not found",
+      });
+    }
   }
 const { max: maxCategoryOrder } = await categoryRepo
   .createQueryBuilder("category")
@@ -633,6 +648,7 @@ const nextCategorySortOrder = (maxCategoryOrder ?? 0) + 1;
     name,
     slug,
     description,
+    leaders,
     isActive,
     sortOrder: nextCategorySortOrder,
   });
@@ -678,7 +694,22 @@ export const updateCategory = authAsyncHandler(async (req: Request, res: Respons
       });
     }
   }
-
+  // Handle experts update
+  if (updateData.leadersIds !== undefined) {
+    if (updateData.leadersIds.length > 0) {
+      const leaders: Leaders[] = await leaderRepo.findByIds(updateData.leadersIds);
+      if (leaders.length !== updateData.leadersIds.length) {
+        return res.status(400).json({
+          success: false,
+          message: "One or more experts not found",
+        });
+      }
+      category.leaders = leaders;
+    } else {
+      category.leaders = [];
+    }
+    delete updateData.expertIds;
+  }
   Object.assign(category, updateData);
   const updatedCategory = await categoryRepo.save(category);
 

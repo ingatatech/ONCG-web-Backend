@@ -12,6 +12,7 @@ import { CaseStudy } from "./entities/CaseStudy";
 import { Expert } from "./entities/Expert";
 import { Partners } from "./entities/Partners";
 import { Subscriber } from "./entities/Subscriber";
+import { Leaders } from "./entities/Leaders";
 
 
 
@@ -31,6 +32,7 @@ export const AppDataSource = new DataSource({
     Expert,
     Partners,
     Subscriber,
+    Leaders,
     Industry,Service,ServiceCategory,
   ],
   migrations: [__dirname + "/migrations/*.ts"],

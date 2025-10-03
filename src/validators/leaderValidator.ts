@@ -1,45 +1,96 @@
 import { body, param, query } from "express-validator"
-
 export const createLeaderValidation = [
   body("name")
     .trim()
     .isLength({ min: 2, max: 100 })
     .withMessage("Name must be between 2 and 100 characters")
-    .matches(/^[a-zA-Z\s\-'.]+$/)
-    .withMessage("Name can only contain letters, spaces, hyphens, apostrophes, and periods"),
+    .matches(/^[a-zA-Z\s\-.,()]+$/)
+    .withMessage("Name can only contain letters, spaces, hyphens, periods, commas, and parentheses"),
 
-  body("title").trim().isLength({ min: 2, max: 150 }).withMessage("Position must be between 2 and 150 characters"),
-
-  body("department")
+  body("title")
     .trim()
-    .isLength({ min: 2, max: 100 })
-    .withMessage("Department must be between 2 and 100 characters"),
-   
+    .isLength({ min: 2, max: 150 })
+    .withMessage("Title must be between 2 and 150 characters"),
 
-  body("bio").trim().isLength({ min: 50, max: 1000 }).withMessage("Bio must be between 50 and 1000 characters"),
+  body("education")
+    .trim()
+    .isLength({ min: 2, max: 200 })
+    .withMessage("Education must be between 2 and 200 characters"),
 
-  body("location").trim().isLength({ min: 2, max: 100 }).withMessage("Location must be between 2 and 100 characters"),
+  body("experience")
+    .trim()
+    .isLength({ min: 1, max: 500 })
+    .withMessage("Experience must be between 5 and 500 characters"),
 
-  body("experience").isInt({ min: 0, max: 50 }).withMessage("Experience must be between 0 and 50 years"),
+  body("bio")
+    .optional()
+    .trim()
+    .isLength({ min: 10, max: 10000 })
+    .withMessage("Bio must be between 10 and 10000 characters"),
 
-  body("projectsLed").isInt({ min: 0, max: 1000 }).withMessage("Projects led must be between 0 and 1000"),
+  body("email")
+    .optional()
+    .isEmail()
+    .withMessage("Invalid email format"),
 
-  body("email").optional().isEmail().normalizeEmail().withMessage("Invalid email format"),
 
-  body("image").optional().isURL().withMessage("Image must be a valid URL"),
-
-  body("specialties").optional().isLength({ max: 500 }).withMessage("Specialties must not exceed 500 characters"),
-
-  body("isActive").optional().isBoolean().withMessage("isActive must be a boolean"),
-
-  body("displayOrder").optional().isInt({ min: 0 }).withMessage("Display order must be a non-negative integer"),
-]
+  body("sortOrder")
+    .optional()
+    .isInt({ min: 0 })
+    .withMessage("Sort order must be a non-negative integer"),
+];
 
 export const updateLeaderValidation = [
-  param("id").isUUID().withMessage("Invalid leader ID"),
+  param("id").isUUID().withMessage("Invalid expert ID"),
 
-  ...createLeaderValidation.map((validation) => validation.optional()),
-]
+  body("name")
+    .optional()
+    .trim()
+    .isLength({ min: 2, max: 100 })
+    .withMessage("Name must be between 2 and 100 characters")
+    .matches(/^[a-zA-Z\s\-.,()]+$/)
+    .withMessage("Name can only contain letters, spaces, hyphens, periods, commas, and parentheses"),
+
+  body("title")
+    .optional()
+    .trim()
+    .isLength({ min: 2, max: 150 })
+    .withMessage("Title must be between 2 and 150 characters"),
+
+  body("credentials")
+    .optional()
+    .trim()
+    .isLength({ min: 2, max: 200 })
+    .withMessage("Credentials must be between 2 and 200 characters"),
+
+  body("experience")
+    .optional()
+    .trim()
+    .isLength({ min: 1, max: 500 })
+    .withMessage("Experience must be between 5 and 500 characters"),
+
+  body("specialization")
+    .optional()
+    .trim()
+    .isLength({ min: 2, max: 100 })
+    .withMessage("Specialization must be between 2 and 100 characters"),
+
+  body("bio")
+    .optional()
+    .trim()
+    .isLength({ min: 10, max: 10000 })
+    .withMessage("Bio must be between 10 and 10000 characters"),
+
+  body("email")
+    .optional()
+    .isEmail()
+    .withMessage("Invalid email format"),
+
+  body("sortOrder")
+    .optional()
+    .isInt({ min: 0 })
+    .withMessage("Sort order must be a non-negative integer"),
+];
 
 export const getLeaderValidation = [param("id").isUUID().withMessage("Invalid leader ID")]
 
