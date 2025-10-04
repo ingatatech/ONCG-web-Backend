@@ -676,7 +676,7 @@ export const updateCategory = authAsyncHandler(async (req: Request, res: Respons
   const { id } = req.params;
   const updateData = { ...req.body };
 
-  const category = await categoryRepo.findOne({ where: { id } });
+  const category = await categoryRepo.findOne({ where: { id } , relations: [ "leaders"],});
   if (!category) {
     return res.status(404).json({
       success: false,
@@ -695,10 +695,10 @@ export const updateCategory = authAsyncHandler(async (req: Request, res: Respons
     }
   }
   // Handle experts update
-  if (updateData.leadersIds !== undefined) {
-    if (updateData.leadersIds.length > 0) {
-      const leaders: Leaders[] = await leaderRepo.findByIds(updateData.leadersIds);
-      if (leaders.length !== updateData.leadersIds.length) {
+  if (updateData.leaderIds !== undefined) {
+    if (updateData.leaderIds.length > 0) {
+      const leaders: Leaders[] = await leaderRepo.findByIds(updateData.leaderIds);
+      if (leaders.length !== updateData.leaderIds.length) {
         return res.status(400).json({
           success: false,
           message: "One or more experts not found",
