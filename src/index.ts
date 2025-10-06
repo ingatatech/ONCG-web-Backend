@@ -15,6 +15,7 @@ import servicesRoutes from "./routes/serviceRoutes";
 import subscriberRoutes from "./routes/subscriberRoutes";
 import expertsRoutes from "./routes/expertsRoutes";
 import leadersRoutes from "./routes/leaderRoutes";
+import affiliationsRoutes from "./routes/affliationsRoutes";
 
 
 const app = express();
@@ -36,6 +37,7 @@ app.use("/api/industries", industryRoutes);
 app.use("/api/services", servicesRoutes);
 app.use("/api/experts", expertsRoutes);
 app.use("/api/leaders", leadersRoutes);
+app.use("/api/affiliations", affiliationsRoutes);
 
 app.get("/", (req, res) => {
   res.send("ONCG API is running!");
