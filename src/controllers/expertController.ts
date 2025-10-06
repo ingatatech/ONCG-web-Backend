@@ -222,34 +222,31 @@ export const getExpertById = asyncHandler(async (req: Request, res: Response) =>
   })
 })
 
-// ✅ Delete expert by ID
 export const deleteExpert = asyncHandler(async (req: Request, res: Response) => {
-  const errors = validationResult(req)
+  const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({
       success: false,
       message: "Validation failed",
       errors: errors.array(),
-    })
+    });
   }
 
-  const { id } = req.params
-  const expert = await expertRepository.findOne({ where: { id } })
+  const { id } = req.params;
+  const result = await expertRepository.delete(id);
 
-  if (!expert) {
+  if (result.affected === 0) {
     return res.status(404).json({
       success: false,
       message: "Expert not found",
-    })
+    });
   }
-
-  await expertRepository.remove(expert)
 
   res.json({
     success: true,
     message: "Expert deleted successfully",
-  })
-})
+  });
+});
 
 
 

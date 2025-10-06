@@ -259,16 +259,14 @@ export const deleteLeader = asyncHandler(
     }
 
     const { id } = req.params;
-    const leader = await leaderRepository.findOne({ where: { id } });
+  const result = await leaderRepository.delete(id);
 
-    if (!leader) {
-      return res.status(404).json({
-        success: false,
-        message: "Leader not found",
-      });
-    }
-
-    await leaderRepository.remove(leader);
+    if (result.affected === 0) {
+    return res.status(404).json({
+      success: false,
+      message: "Leader not found",
+    });
+  }
 
     res.json({
       success: true,
