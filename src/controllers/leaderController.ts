@@ -29,7 +29,7 @@ export const createLeader = authAsyncHandler(
     experience,
     projectsLed,
     education,
-    RealisedProjects,
+    realisedProjects,
     professionalMembership
     } = req.body;
 function safeParseArray(field: any): string[] {
@@ -87,7 +87,7 @@ const parsedprofessionalMembership = safeParseArray(professionalMembership)
      projectsLed: Number(projectsLed) || 0,
      education: parsedEducation,
      professionalMembership: parsedprofessionalMembership,
-     RealisedProjects: RealisedProjects,
+     realisedProjects: realisedProjects,
      image: imageUrl,
      sortOrder: maxOrder + 1,
     });

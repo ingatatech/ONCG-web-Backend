@@ -28,7 +28,7 @@ export const createExpert = authAsyncHandler(async (req: Request, res: Response)
     experience,
     projectsLed,
     education,
-    RealisedProjects,
+    realisedProjects,
     professionalMembership
   } = req.body
 
@@ -68,7 +68,7 @@ export const createExpert = authAsyncHandler(async (req: Request, res: Response)
     projectsLed: Number(projectsLed) || 0,
     education: parsedEducation,
     professionalMembership: parsedprofessionalMembership,
-    RealisedProjects: RealisedProjects,
+    realisedProjects: realisedProjects,
     image: imageUrl,
     sortOrder: maxOrder + 1,
   })
