@@ -12,6 +12,7 @@ import {
 import { CaseStudy } from "./CaseStudy"
 import { ServiceCategory } from "./ServiceCategory"
 import { Expert } from "./Expert"
+// import { Leaders } from "./Leaders"
 
 @Entity("services")
 export class Service {
