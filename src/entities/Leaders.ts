@@ -40,8 +40,8 @@ export class Leaders {
     @Column("text", { array: true })
     education!: string[]
     
-    @Column("text", { array: true, nullable: true })
-    specialties!: string[]
+    @Column("text")
+    RealisedProjects!: string
   
     @Column("text", { array: true, nullable: true })
     professionalMembership!: string[]

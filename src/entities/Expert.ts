@@ -46,8 +46,8 @@ export class Expert {
   @Column("text", { array: true })
   education!: string[]
   
-  @Column("text", { array: true, nullable: true })
-  specialties!: string[]
+  @Column("text")
+  specialties!: string
 
   @Column("text", { array: true, nullable: true })
   professionalMembership!: string[]

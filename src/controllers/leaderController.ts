@@ -29,7 +29,7 @@ export const createLeader = authAsyncHandler(
     experience,
     projectsLed,
     education,
-    specialties,
+    RealisedProjects,
     professionalMembership
     } = req.body;
 function safeParseArray(field: any): string[] {
@@ -53,12 +53,8 @@ function safeParseArray(field: any): string[] {
   return []
 }
 
-      // Parse JSON strings for arrays
-  // const parsedEducation = education ? JSON.parse(education) : []
-  // const parsedSpecialties = specialties ? JSON.parse(specialties) : []
-  // const parsedprofessionalMembership = professionalMembership ? JSON.parse(professionalMembership) : []
+
 const parsedEducation = safeParseArray(education)
-const parsedSpecialties = safeParseArray(specialties)
 const parsedprofessionalMembership = safeParseArray(professionalMembership)
     let imageUrl = "";
     if (req.file) {
@@ -91,7 +87,7 @@ const parsedprofessionalMembership = safeParseArray(professionalMembership)
      projectsLed: Number(projectsLed) || 0,
      education: parsedEducation,
      professionalMembership: parsedprofessionalMembership,
-     specialties: parsedSpecialties,
+     RealisedProjects: RealisedProjects,
      image: imageUrl,
      sortOrder: maxOrder + 1,
     });
@@ -236,9 +232,7 @@ export const updateLeader = asyncHandler(
   if (updateData.education) {
     updateData.education = JSON.parse(updateData.education)
   }
-  if (updateData.specialties) {
-    updateData.specialties = JSON.parse(updateData.specialties)
-  }
+
  if (updateData.professionalMembership) {
     updateData.professionalMembership = JSON.parse(updateData.professionalMembership)
   }

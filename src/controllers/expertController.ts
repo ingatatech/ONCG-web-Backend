@@ -28,13 +28,12 @@ export const createExpert = authAsyncHandler(async (req: Request, res: Response)
     experience,
     projectsLed,
     education,
-    specialties,
+    RealisedProjects,
     professionalMembership
   } = req.body
 
   // Parse JSON strings for arrays
   const parsedEducation = education ? JSON.parse(education) : []
-  const parsedSpecialties = specialties ? JSON.parse(specialties) : []
   const parsedprofessionalMembership = professionalMembership ? JSON.parse(professionalMembership) : []
 
   let imageUrl = ""
@@ -69,7 +68,7 @@ export const createExpert = authAsyncHandler(async (req: Request, res: Response)
     projectsLed: Number(projectsLed) || 0,
     education: parsedEducation,
     professionalMembership: parsedprofessionalMembership,
-    specialties: parsedSpecialties,
+    RealisedProjects: RealisedProjects,
     image: imageUrl,
     sortOrder: maxOrder + 1,
   })
@@ -180,9 +179,6 @@ export const updateExpert = asyncHandler(async (req: Request, res: Response) => 
   const updateData = { ...req.body }
   if (updateData.education) {
     updateData.education = JSON.parse(updateData.education)
-  }
-  if (updateData.specialties) {
-    updateData.specialties = JSON.parse(updateData.specialties)
   }
  if (updateData.professionalMembership) {
     updateData.professionalMembership = JSON.parse(updateData.professionalMembership)
