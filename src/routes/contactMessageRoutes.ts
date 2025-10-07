@@ -26,7 +26,7 @@ contactMessageRouter.delete("/:id", validateUUID, contactMessageController.delet
 
 // Admin: Update the responded status of a contact message
 contactMessageRouter.patch(
-  "/:id/responded",
+  "/:id",
   validateUUID,
   validateRespondedUpdate,
   handleValidationErrors,
