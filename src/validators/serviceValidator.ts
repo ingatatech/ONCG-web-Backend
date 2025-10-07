@@ -3,21 +3,21 @@ import { body, param, query } from "express-validator";
 export const createServiceValidation = [
   body("name")
     .trim()
-    .isLength({ min: 2, max: 100 })
+    .isLength({ min: 2, max: 200 })
     .withMessage("Name must be between 2 and 100 characters")
     .matches(/^[a-zA-Z0-9\s\-&.,()]+$/)
     .withMessage("Name can only contain letters, numbers, spaces, hyphens, ampersands, periods, commas, and parentheses"),
 
   body("slug")
     .trim()
-    .isLength({ min: 2, max: 100 })
+    .isLength({ min: 2, max: 200 })
     .withMessage("Slug must be between 2 and 100 characters")
     .matches(/^[a-z0-9\-]+$/)
     .withMessage("Slug can only contain lowercase letters, numbers, and hyphens"),
 
   body("serviceDescription")
     .trim()
-    .isLength({ min: 50, max: 2000 })
+    .isLength({ min: 50, max: 20000 })
     .withMessage("Service description must be between 50 and 2000 characters"),
 
   body("categoryId")
@@ -63,19 +63,19 @@ export const createServiceValidation = [
   body("caseStudies.*.title")
     .optional()
     .trim()
-    .isLength({ min: 5, max: 200 })
+    .isLength({ min: 5, max: 20000 })
     .withMessage("Case study title must be between 5 and 200 characters"),
 
   body("caseStudies.*.description")
     .optional()
     .trim()
-    .isLength({ min: 20, max: 2000 })
+    .isLength({ min: 20, max: 200000 })
     .withMessage("Case study description must be between 50 and 2000 characters"),
 
   body("caseStudies.*.impact")
     .optional()
     .trim()
-    .isLength({ min: 3, max: 1000 })
+    .isLength({ min: 3, max: 100000 })
     .withMessage("Case study impact must be between 10 and 1000 characters"),
 
   body("caseStudies.*.displayOrder")
@@ -97,7 +97,7 @@ export const updateServiceValidation = [
   body("name")
     .optional()
     .trim()
-    .isLength({ min: 2, max: 100 })
+    .isLength({ min: 2, max: 10000 })
     .withMessage("Name must be between 2 and 100 characters")
     .matches(/^[a-zA-Z0-9\s\-&.,()]+$/)
     .withMessage("Name can only contain letters, numbers, spaces, hyphens, ampersands, periods, commas, and parentheses"),
@@ -105,7 +105,7 @@ export const updateServiceValidation = [
   body("slug")
     .optional()
     .trim()
-    .isLength({ min: 2, max: 100 })
+    .isLength({ min: 2, max: 10000 })
     .withMessage("Slug must be between 2 and 100 characters")
     .matches(/^[a-z0-9\-]+$/)
     .withMessage("Slug can only contain lowercase letters, numbers, and hyphens"),
@@ -119,7 +119,7 @@ export const updateServiceValidation = [
   body("serviceDescription")
     .optional()
     .trim()
-    .isLength({ min: 50, max: 2000 })
+    .isLength({ min: 50, max: 20000 })
     .withMessage("Service description must be between 50 and 2000 characters"),
   body("categoryId")
     .optional()
@@ -255,18 +255,18 @@ export const validateExpertCreation = [
 
   body("education")
     .trim()
-    .isLength({ min: 2, max: 200 })
+    .isLength({ min: 2, max: 200000 })
     .withMessage("Education must be between 2 and 200 characters"),
 
   body("experience")
     .trim()
-    .isLength({ min: 1, max: 500 })
+    .isLength({ min: 1, max: 50000 })
     .withMessage("Experience must be between 5 and 500 characters"),
 
   body("bio")
     .optional()
     .trim()
-    .isLength({ min: 10, max: 10000 })
+    .isLength({ min: 10, max: 100000 })
     .withMessage("Bio must be between 10 and 10000 characters"),
 
   body("email")

@@ -14,18 +14,18 @@ export const createLeaderValidation = [
 
   body("education")
     .trim()
-    .isLength({ min: 2, max: 200 })
+    .isLength({ min: 2, max: 200000 })
     .withMessage("Education must be between 2 and 200 characters"),
 
   body("experience")
     .trim()
-    .isLength({ min: 1, max: 500 })
+    .isLength({ min: 1, max: 5000 })
     .withMessage("Experience must be between 5 and 500 characters"),
 
   body("bio")
     .optional()
     .trim()
-    .isLength({ min: 10, max: 10000 })
+    .isLength({ min: 10, max: 100000 })
     .withMessage("Bio must be between 10 and 10000 characters"),
 
   body("email")
@@ -54,26 +54,21 @@ export const updateLeaderValidation = [
   body("title")
     .optional()
     .trim()
-    .isLength({ min: 2, max: 150 })
+    .isLength({ min: 2, max: 1500 })
     .withMessage("Title must be between 2 and 150 characters"),
 
   body("credentials")
     .optional()
     .trim()
-    .isLength({ min: 2, max: 200 })
+    .isLength({ min: 2, max: 20000 })
     .withMessage("Credentials must be between 2 and 200 characters"),
 
   body("experience")
     .optional()
     .trim()
-    .isLength({ min: 1, max: 500 })
+    .isLength({ min: 1, max: 5000 })
     .withMessage("Experience must be between 5 and 500 characters"),
 
-  body("specialization")
-    .optional()
-    .trim()
-    .isLength({ min: 2, max: 100 })
-    .withMessage("Specialization must be between 2 and 100 characters"),
 
   body("bio")
     .optional()
