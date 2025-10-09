@@ -19,6 +19,7 @@ export const createExpert = authAsyncHandler(async (req: Request, res: Response)
 
   const {
     name,
+    employment_type,
     title,
     bio,
     email,
@@ -59,6 +60,7 @@ export const createExpert = authAsyncHandler(async (req: Request, res: Response)
   const expert = expertRepository.create({
     name,
     title,
+    employment_type,
     bio,
     email,
     linkedinUrl,
