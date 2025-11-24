@@ -100,7 +100,7 @@ export async function sendPasswordResetConfirmationEmail(userData: {
         </div>
         
         <div style="text-align: center; margin: 30px 0;">
-          <a href="${process.env.FRONTEND_URL || 'https://oncg.com'}/login" 
+          <a href="${process.env.FRONTEND_URL || 'https://oncg.rw'}/admin/login" 
              style="background-color: #0ea5e9; color: white; padding: 12px 30px; text-decoration: none; border-radius: 6px; font-weight: bold; display: inline-block;">
             Login to Your Account
           </a>
@@ -120,7 +120,7 @@ export async function sendPasswordResetConfirmationEmail(userData: {
         <p style="font-size: 14px; color: #64748b; text-align: center;">
           Best regards,<br/>
           <strong>Omega Sir Team</strong><br/>
-          <a href="mailto:support@oncg.com" style="color: #0ea5e9;">support@oncg.com</a>
+          <a href="mailto:info@oncg.rw" style="color: #0ea5e9;">info@oncg.rw</a>
         </p>
       </div>
     `;

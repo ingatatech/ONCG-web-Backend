@@ -34,7 +34,7 @@ Installation
    - DATABASE_URL=postgres://user:password@host:port/db
    - EMAIL_USER=your@gmail.com
    - EMAIL_PASSWORD=your-app-password
-   - FRONTEND_URL=https://oncg.com
+   - FRONTEND_URL=https://oncg.rw
    - REDIS_URL=redis://localhost:6379
    - JWT_SECRET=replace_me
 

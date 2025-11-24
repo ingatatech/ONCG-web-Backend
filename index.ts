@@ -1,21 +1,21 @@
 import express from "express";
 import "reflect-metadata";
-import { AppDataSource } from "./data-source";
 import cors from "cors";
 import bodyParser from "body-parser";
 
-import userRoutes from "./routes/userRoutes";
-import messagesRoutes from "./routes/contactMessageRoutes";
-import partnersRoutes from "./routes/partnersRoutes";
-import testimonialRoutes from "./routes/testimonialRoutes";
-import caseStudiesRoutes from "./routes/caseStudyRoutes";
-import insightsRoutes from "./routes/insightRoutes";
-import industryRoutes from "./routes/industryRoutes";
-import servicesRoutes from "./routes/serviceRoutes";
-import subscriberRoutes from "./routes/subscriberRoutes";
-import expertsRoutes from "./routes/expertsRoutes";
-import leadersRoutes from "./routes/leaderRoutes";
-import affiliationsRoutes from "./routes/affliationsRoutes";
+import userRoutes from "./src/routes/userRoutes";
+import messagesRoutes from "./src/routes/contactMessageRoutes";
+import partnersRoutes from "./src/routes/partnersRoutes";
+import testimonialRoutes from "./src/routes/testimonialRoutes";
+import caseStudiesRoutes from "./src/routes/caseStudyRoutes";
+import insightsRoutes from "./src/routes/insightRoutes";
+import industryRoutes from "./src/routes/industryRoutes";
+import servicesRoutes from "./src/routes/serviceRoutes";
+import subscriberRoutes from "./src/routes/subscriberRoutes";
+import expertsRoutes from "./src/routes/expertsRoutes";
+import leadersRoutes from "./src/routes/leaderRoutes";
+import affiliationsRoutes from "./src/routes/affliationsRoutes";
+import { AppDataSource } from "./src/data-source";
 
 
 const app = express();

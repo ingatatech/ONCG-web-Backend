@@ -159,7 +159,7 @@ export const createInsight = authAsyncHandler(async (req: MulterRequest, res: Re
           title: safeTitle,
           preview,
           industry: industryName,
-          link: `${process.env.FRONTEND_URL || "https://oncg.com"}/insights/${savedInsight.id}`,
+          link: `${process.env.FRONTEND_URL || "https://oncg.rw"}/insights/${savedInsight.id}`,
         }),
       ),
     );
@@ -180,7 +180,7 @@ export const updateInsight = authAsyncHandler(async (req: MulterRequest, res: Re
 
   // Handle image upload if present
     if (req.file) {
-    updateData.image = await uploadImage(req.file);
+    updateData.image = await uploadImage(req.file.path);
   }
 
   // Update industry if provided
